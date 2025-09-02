@@ -1,0 +1,26 @@
+{
+  "name": "Humanbo - AI That Feels Human",
+  "short_name": "Humanbo",
+  "description": "Intelligence Reimagined. Crafting AI experiences that enhance human potential with sophistication, empathy, and purpose.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FAFAFA",
+  "theme_color": "#3A86FF",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "https://cdn.websparks.ai/Project_Images/57_Group2085662504-25fe665c.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://cdn.websparks.ai/Project_Images/57_Group2085662504-25fe665c.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["productivity", "business", "utilities"],
+  "lang": "en-US"
+}

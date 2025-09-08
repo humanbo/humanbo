@@ -6,24 +6,24 @@ const AskifyPage: React.FC = () => {
 
   const features = [
     {
-      title: "Instant Answers",
-      description: "Highlight any text on any website and get instant, contextual answers powered by advanced AI.",
+      title: "Contextual Intelligence",
+      description: "Understands not just your question, but the webpage context, your intent, and the nuanced meaning behind your inquiry.",
       icon: "⚡"
     },
     {
-      title: "Smart Chat Interface",
-      description: "Ask follow-up questions and have natural conversations while browsing.",
+      title: "Conversational Flow",
+      description: "Engage in natural, multi-turn conversations that build on previous context without losing the thread of your exploration.",
       icon: "💬"
     },
     {
-      title: "Context Awareness",
-      description: "Understands the webpage you're on and provides relevant, accurate responses.",
-      icon: "🧠"
+      title: "Privacy-First Design",
+      description: "Your browsing remains private. We process only what you explicitly share, with zero tracking or data collection.",
+      icon: "🔒"
     },
     {
-      title: "Privacy First",
-      description: "Your browsing data stays private. We only process what you explicitly ask about.",
-      icon: "🔒"
+      title: "Seamless Integration",
+      description: "Works invisibly within your existing browsing habits. No workflow disruption, just enhanced understanding.",
+      icon: "🧠"
     }
   ];
 
@@ -34,7 +34,7 @@ const AskifyPage: React.FC = () => {
         <div className="max-w-humanbo mx-auto text-center">
           <div className="mb-6">
             <span className="inline-block px-4 py-2 bg-humanbo-subtle text-humanbo-gray font-inter font-light text-sm tracking-ultra-wide uppercase rounded-full">
-              💬 Browser Extension
+              💬 Browser Intelligence
             </span>
           </div>
           <h1 className="text-6xl md:text-7xl lg:text-8xl font-inter font-extralight text-humanbo-black mb-8 leading-ultra-tight tracking-tight">
@@ -43,7 +43,7 @@ const AskifyPage: React.FC = () => {
             <span className="font-light italic text-humanbo-blue">Askify</span>
           </h1>
           <p className="text-xl md:text-2xl font-inter font-light text-humanbo-gray mb-12 max-w-3xl mx-auto leading-relaxed tracking-wide">
-            Your intelligent browsing companion. Get instant answers to any question while exploring the web.
+            Transform any webpage into an intelligent conversation partner. Get instant, contextual insights without breaking your browsing flow.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
             <button className="group bg-humanbo-black text-humanbo-white px-10 py-4 rounded-full font-inter font-medium text-base tracking-wide hover:bg-gray-800 transition-all duration-300 transform hover:scale-105">
@@ -53,7 +53,7 @@ const AskifyPage: React.FC = () => {
               </span>
             </button>
             <button className="border-2 border-humanbo-black text-humanbo-black px-10 py-4 rounded-full font-inter font-medium text-base tracking-wide hover:bg-humanbo-black hover:text-humanbo-white transition-all duration-300">
-              Watch Demo
+              Experience the Demo
             </button>
           </div>
         </div>
@@ -64,10 +64,10 @@ const AskifyPage: React.FC = () => {
         <div className="max-w-humanbo mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-inter font-light text-humanbo-black mb-6 tracking-tight">
-              Powerful Features
+              Intelligence That Understands Context
             </h2>
             <p className="text-lg font-inter font-light text-humanbo-gray max-w-2xl mx-auto">
-              Everything you need to make browsing more intelligent and productive
+              Beyond simple Q&A—experience AI that grasps the full picture of your digital exploration
             </p>
           </div>
           
@@ -98,28 +98,31 @@ const AskifyPage: React.FC = () => {
         <div className="max-w-humanbo mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-inter font-light text-humanbo-black mb-6 tracking-tight">
-              How It Works
+              Effortless Intelligence
             </h2>
+            <p className="text-lg font-inter font-light text-humanbo-gray max-w-2xl mx-auto">
+              Three simple steps to transform your browsing experience forever
+            </p>
           </div>
           
           <div className="grid md:grid-cols-3 gap-12">
             {[
               {
                 step: "01",
-                title: "Install Extension",
-                description: "Add Askify to your browser in seconds. No setup required.",
+                title: "Install & Forget",
+                description: "One-click installation. No configuration, no learning curve. Just enhanced browsing from day one.",
                 icon: "📥"
               },
               {
                 step: "02", 
-                title: "Highlight & Ask",
-                description: "Select any text on any website and ask your question.",
+                title: "Highlight & Inquire",
+                description: "Select any text, ask any question. Askify understands context, intent, and provides nuanced insights.",
                 icon: "✨"
               },
               {
                 step: "03",
-                title: "Get Smart Answers",
-                description: "Receive instant, contextual responses powered by AI.",
+                title: "Discover & Explore",
+                description: "Receive intelligent responses that deepen understanding and spark new avenues of exploration.",
                 icon: "🎯"
               }
             ].map((step, index) => (
@@ -146,15 +149,15 @@ const AskifyPage: React.FC = () => {
       <section className="py-20 px-8 bg-humanbo-subtle">
         <div className="max-w-humanbo mx-auto text-center">
           <h2 className="text-4xl md:text-5xl font-inter font-light text-humanbo-black mb-6 tracking-tight">
-            Ready to Browse Smarter?
+            Ready to Browse Intelligently?
           </h2>
           <p className="text-lg font-inter font-light text-humanbo-gray mb-8 max-w-2xl mx-auto">
-            Join thousands of users who are already browsing more intelligently with Askify.
+            Join thousands of curious minds who have transformed their relationship with information through Askify.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
             <button className="group bg-humanbo-blue text-humanbo-white px-10 py-4 rounded-full font-inter font-medium text-base tracking-wide hover:bg-blue-600 transition-all duration-300 transform hover:scale-105">
               <span className="flex items-center gap-2">
-                Get Started Free
+                Start Exploring Smarter
                 <i className="bi bi-arrow-right transition-transform duration-300 group-hover:translate-x-1"></i>
               </span>
             </button>
@@ -162,7 +165,7 @@ const AskifyPage: React.FC = () => {
               to="/"
               className="text-humanbo-black font-inter font-light text-base tracking-wide hover:text-humanbo-blue transition-colors duration-300"
             >
-              ← Back to Home
+              ← Discover More Solutions
             </Link>
           </div>
         </div>

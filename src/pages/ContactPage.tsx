@@ -5,7 +5,7 @@ import LoadingSpinner from '../components/LoadingSpinner';
 import { useToast } from '../hooks/useToast';
 import { validateForm } from '../utils/validation';
 import { contactAPI, handleApiError } from '../utils/api';
-import { trackFormSubmission, trackButtonClick } from '../utils/analytics';
+import { trackFormSubmission, trackButtonClick, trackUserEngagement } from '../utils/analytics';
 
 const ContactPage: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -30,11 +30,15 @@ const ContactPage: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
+    // Track form start
+    trackUserEngagement('form_start', 'contact_form');
+    
     // Validate form
     const validation = validateForm(formData, validationRules);
     if (!validation.isValid) {
       setErrors(validation.errors);
       showError('Please fix the errors below');
+      trackFormSubmission('contact_form', false);
       return;
     }
     
@@ -48,6 +52,7 @@ const ContactPage: React.FC = () => {
         setIsSubmitted(true);
         showSuccess('Message sent successfully!', 'We\'ll get back to you within 24 hours.');
         trackFormSubmission('contact_form', true);
+        trackUserEngagement('form_complete', 'contact_form');
       } else {
         throw new Error(response.error || 'Failed to send message');
       }
@@ -64,6 +69,9 @@ const ContactPage: React.FC = () => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
     
+    // Track form interaction
+    trackUserEngagement('form_interaction', `${name}_field`);
+    
     // Clear error when user starts typing
     if (errors[name]) {
       setErrors(prev => ({ ...prev, [name]: '' }));
@@ -72,28 +80,28 @@ const ContactPage: React.FC = () => {
 
   const contactMethods = [
     {
-      title: "General Inquiries",
-      description: "Questions about our products or services",
-      email: "hello@humanbo.com",
-      icon: "💬"
-    },
-    {
-      title: "Technical Support",
-      description: "Need help with our AI tools?",
-      email: "support@humanbo.com",
-      icon: "🛠️"
-    },
-    {
-      title: "Business Partnerships",
-      description: "Interested in partnering with us?",
+      title: "Partnership Inquiries",
+      description: "Explore collaboration opportunities and strategic partnerships",
       email: "partnerships@humanbo.com",
       icon: "🤝"
     },
     {
-      title: "Press & Media",
-      description: "Media inquiries and press requests",
+      title: "Technical Support",
+      description: "Get expert help with our AI tools and integrations",
+      email: "support@humanbo.com",
+      icon: "🛠️"
+    },
+    {
+      title: "Media & Press",
+      description: "Press inquiries, interviews, and media resources",
       email: "press@humanbo.com",
       icon: "📰"
+    },
+    {
+      title: "General Inquiries",
+      description: "Questions about our mission, products, or vision",
+      email: "hello@humanbo.com",
+      icon: "💬"
     }
   ];
 
@@ -109,10 +117,10 @@ const ContactPage: React.FC = () => {
           <div className="max-w-md w-full mx-auto px-8 text-center">
             <div className="text-6xl mb-6">🎉</div>
             <h1 className="text-4xl font-inter font-light text-humanbo-black mb-4 tracking-tight">
-              Thank You!
+              Message Received!
             </h1>
             <p className="text-lg font-inter font-light text-humanbo-gray mb-8">
-              We've received your message and will get back to you within 24 hours.
+              Thank you for reaching out. Our team will respond within 24 hours with thoughtful insights tailored to your inquiry.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button 
@@ -136,7 +144,7 @@ const ContactPage: React.FC = () => {
                 className="border-2 border-humanbo-black text-humanbo-black px-8 py-3 rounded-full font-inter font-medium text-base tracking-wide hover:bg-humanbo-black hover:text-humanbo-white transition-all duration-300 text-center"
                 onClick={() => trackButtonClick('back_to_home', 'contact_success')}
               >
-                Back to Home
+                Return Home
               </Link>
             </div>
           </div>
@@ -148,9 +156,9 @@ const ContactPage: React.FC = () => {
   return (
     <>
       <SEOHead
-        title="Contact Us"
-        description="Get in touch with the Humanbo team. We're here to help with questions about our AI solutions, partnerships, and support."
-        keywords="contact, support, help, customer service, business inquiries, partnerships"
+        title="Connect With Us"
+        description="Start a conversation with the Humanbo team. We're here to discuss partnerships, answer questions, and explore how AI can amplify your potential."
+        keywords="contact, support, partnerships, collaboration, AI consultation, human-centered AI"
         url="/contact"
       />
       <div className="pt-24 pb-20">
@@ -158,12 +166,12 @@ const ContactPage: React.FC = () => {
         <section className="py-20 px-8">
           <div className="max-w-humanbo mx-auto text-center">
             <h1 className="text-6xl md:text-7xl lg:text-8xl font-inter font-extralight text-humanbo-black mb-8 leading-ultra-tight tracking-tight">
-              Get In
+              Let's Start a
               <br />
-              <span className="font-light italic text-humanbo-blue">Touch</span>
+              <span className="font-light italic text-humanbo-blue">Conversation</span>
             </h1>
             <p className="text-xl md:text-2xl font-inter font-light text-humanbo-gray mb-12 max-w-3xl mx-auto leading-relaxed tracking-wide">
-              Have questions about our AI solutions? Want to explore partnerships? We'd love to hear from you.
+              Whether you're curious about our AI solutions, interested in partnerships, or have a vision to explore—we're here to listen and collaborate.
             </p>
           </div>
         </section>
@@ -173,10 +181,10 @@ const ContactPage: React.FC = () => {
           <div className="max-w-humanbo mx-auto">
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-inter font-light text-humanbo-black mb-6 tracking-tight">
-                How Can We Help?
+                Choose Your Path
               </h2>
               <p className="text-lg font-inter font-light text-humanbo-gray max-w-2xl mx-auto">
-                Choose the best way to reach us based on your needs
+                Connect with the right team member for your specific needs and interests
               </p>
             </div>
             
@@ -211,29 +219,29 @@ const ContactPage: React.FC = () => {
             <div className="grid md:grid-cols-2 gap-16">
               <div>
                 <h2 className="text-4xl md:text-5xl font-inter font-light text-humanbo-black mb-8 tracking-tight">
-                  Send Us a Message
+                  Share Your Vision
                 </h2>
                 <p className="text-lg font-inter font-light text-humanbo-gray mb-8 leading-relaxed">
-                  Fill out the form and we'll get back to you as soon as possible. We typically respond within 24 hours.
+                  Tell us about your challenges, aspirations, or ideas. We believe the best solutions emerge from meaningful conversations.
                 </p>
                 
                 <div className="space-y-6">
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 bg-humanbo-blue/10 rounded-full flex items-center justify-center">
-                      <i className="bi bi-geo-alt text-humanbo-blue"></i>
+                      <i className="bi bi-clock text-humanbo-blue"></i>
                     </div>
                     <div>
-                      <h3 className="font-inter font-medium text-humanbo-black">Office</h3>
-                      <p className="font-inter font-light text-humanbo-gray text-sm">San Francisco, CA</p>
+                      <h3 className="font-inter font-medium text-humanbo-black">Thoughtful Response</h3>
+                      <p className="font-inter font-light text-humanbo-gray text-sm">Within 24 hours, always</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 bg-humanbo-blue/10 rounded-full flex items-center justify-center">
-                      <i className="bi bi-clock text-humanbo-blue"></i>
+                      <i className="bi bi-people text-humanbo-blue"></i>
                     </div>
                     <div>
-                      <h3 className="font-inter font-medium text-humanbo-black">Response Time</h3>
-                      <p className="font-inter font-light text-humanbo-gray text-sm">Within 24 hours</p>
+                      <h3 className="font-inter font-medium text-humanbo-black">Human Connection</h3>
+                      <p className="font-inter font-light text-humanbo-gray text-sm">Real people, genuine conversations</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-4">
@@ -241,8 +249,8 @@ const ContactPage: React.FC = () => {
                       <i className="bi bi-shield-check text-humanbo-blue"></i>
                     </div>
                     <div>
-                      <h3 className="font-inter font-medium text-humanbo-black">Privacy</h3>
-                      <p className="font-inter font-light text-humanbo-gray text-sm">Your data is secure with us</p>
+                      <h3 className="font-inter font-medium text-humanbo-black">Privacy Respected</h3>
+                      <p className="font-inter font-light text-humanbo-gray text-sm">Your information stays secure</p>
                     </div>
                   </div>
                 </div>
@@ -264,7 +272,7 @@ const ContactPage: React.FC = () => {
                         className={`w-full px-4 py-3 border rounded-lg font-inter font-light text-base text-humanbo-black placeholder-humanbo-gray focus:outline-none focus:ring-1 transition-all duration-300 ${
                           errors.name ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : 'border-humanbo-divider focus:border-humanbo-blue focus:ring-humanbo-blue'
                         }`}
-                        placeholder="John Doe"
+                        placeholder="Your name"
                         disabled={isLoading}
                       />
                       {errors.name && (
@@ -284,7 +292,7 @@ const ContactPage: React.FC = () => {
                         className={`w-full px-4 py-3 border rounded-lg font-inter font-light text-base text-humanbo-black placeholder-humanbo-gray focus:outline-none focus:ring-1 transition-all duration-300 ${
                           errors.email ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : 'border-humanbo-divider focus:border-humanbo-blue focus:ring-humanbo-blue'
                         }`}
-                        placeholder="john@example.com"
+                        placeholder="your@email.com"
                         disabled={isLoading}
                       />
                       {errors.email && (
@@ -295,7 +303,7 @@ const ContactPage: React.FC = () => {
 
                   <div>
                     <label htmlFor="company" className="block text-sm font-inter font-medium text-humanbo-black mb-2">
-                      Company (Optional)
+                      Organization (Optional)
                     </label>
                     <input
                       type="text"
@@ -304,14 +312,14 @@ const ContactPage: React.FC = () => {
                       value={formData.company}
                       onChange={handleChange}
                       className="w-full px-4 py-3 border border-humanbo-divider rounded-lg font-inter font-light text-base text-humanbo-black placeholder-humanbo-gray focus:outline-none focus:border-humanbo-blue focus:ring-1 focus:ring-humanbo-blue transition-all duration-300"
-                      placeholder="Your Company"
+                      placeholder="Your organization"
                       disabled={isLoading}
                     />
                   </div>
 
                   <div>
                     <label htmlFor="subject" className="block text-sm font-inter font-medium text-humanbo-black mb-2">
-                      Subject *
+                      What brings you here? *
                     </label>
                     <select
                       id="subject"
@@ -323,13 +331,13 @@ const ContactPage: React.FC = () => {
                       }`}
                       disabled={isLoading}
                     >
-                      <option value="">Select a subject</option>
-                      <option value="general">General Inquiry</option>
+                      <option value="">Choose your interest</option>
+                      <option value="partnership">Partnership Opportunity</option>
+                      <option value="product">Product Inquiry</option>
                       <option value="support">Technical Support</option>
-                      <option value="partnership">Business Partnership</option>
-                      <option value="press">Press & Media</option>
-                      <option value="careers">Careers</option>
-                      <option value="other">Other</option>
+                      <option value="press">Media & Press</option>
+                      <option value="careers">Career Opportunities</option>
+                      <option value="other">Something Else</option>
                     </select>
                     {errors.subject && (
                       <p className="mt-1 text-xs text-red-500 font-inter font-light">{errors.subject}</p>
@@ -338,7 +346,7 @@ const ContactPage: React.FC = () => {
 
                   <div>
                     <label htmlFor="message" className="block text-sm font-inter font-medium text-humanbo-black mb-2">
-                      Message *
+                      Your Message *
                     </label>
                     <textarea
                       id="message"
@@ -349,7 +357,7 @@ const ContactPage: React.FC = () => {
                       className={`w-full px-4 py-3 border rounded-lg font-inter font-light text-base text-humanbo-black placeholder-humanbo-gray focus:outline-none focus:ring-1 transition-all duration-300 resize-none ${
                         errors.message ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : 'border-humanbo-divider focus:border-humanbo-blue focus:ring-humanbo-blue'
                       }`}
-                      placeholder="Tell us how we can help you..."
+                      placeholder="Share your thoughts, questions, or ideas..."
                       disabled={isLoading}
                     />
                     {errors.message && (
@@ -369,11 +377,11 @@ const ContactPage: React.FC = () => {
                     {isLoading ? (
                       <span className="flex items-center justify-center gap-2">
                         <LoadingSpinner size="sm" color="text-white" />
-                        Sending Message...
+                        Sending Your Message...
                       </span>
                     ) : (
                       <span className="flex items-center justify-center gap-2">
-                        Send Message
+                        Start the Conversation
                         <i className="bi bi-send"></i>
                       </span>
                     )}

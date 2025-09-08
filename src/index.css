@@ -2,6 +2,42 @@
 @tailwind components;
 @tailwind utilities;
 
+/* CSS Custom Properties for Light Theme Only */
+:root {
+  --bg: #FFFFFF;
+  --wash: #F7F9FB;
+  --text: #0D0F12;
+  --subtext: #515761;
+  --border: #E8EBEF;
+  --primary: #0A84FF;
+  --accent: #10B981;
+}
+
+/* Apply theme colors with safe fallbacks */
+body {
+  background-color: var(--bg, #FFFFFF);
+  color: var(--text, #0D0F12);
+  transition: background-color 160ms cubic-bezier(0.22,1,0.36,1), color 160ms cubic-bezier(0.22,1,0.36,1);
+  margin: 0;
+  padding: 0;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Safe body class handling with error prevention */
+body.loading {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+body.loaded {
+  opacity: 1;
+}
+
+/* Prevent flash of unstyled content */
+html {
+  background-color: #FFFFFF;
+}
+
 /* Hide scrollbar globally while maintaining scroll functionality */
 * {
   scrollbar-width: none; /* Firefox */
@@ -22,9 +58,20 @@ body::-webkit-scrollbar {
   display: none; /* Safari and Chrome */
 }
 
-/* Ensure smooth scrolling */
+/* Ensure smooth scrolling with fallback */
 html {
   scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  
+  body.loading,
+  body.loaded {
+    transition: none;
+  }
 }
 
 /* Premium font rendering */
@@ -34,49 +81,312 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-/* Custom selection colors */
+/* Custom selection colors with fallbacks */
 ::selection {
-  background-color: #3A86FF;
-  color: #FFFFFF;
+  background-color: var(--primary, #0A84FF);
+  color: var(--bg, #FFFFFF);
 }
 
 ::-moz-selection {
-  background-color: #3A86FF;
-  color: #FFFFFF;
+  background-color: var(--primary, #0A84FF);
+  color: var(--bg, #FFFFFF);
 }
 
-/* Premium focus states */
+/* Premium focus states with safe fallbacks */
 *:focus {
   outline: none;
 }
 
 *:focus-visible {
-  outline: 2px solid #3A86FF;
+  outline: 2px solid var(--primary, #0A84FF);
   outline-offset: 2px;
+  box-shadow: 0 0 0 1px var(--bg, #FFFFFF);
 }
 
-/* Custom animations */
-@keyframes fade-in {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
+/* Smooth transitions for all interactive elements */
+button, a, input, select, textarea {
+  transition: all 160ms cubic-bezier(0.22,1,0.36,1);
+}
+
+/* Enhanced backdrop blur support with fallbacks */
+@supports (backdrop-filter: blur(20px)) {
+  .backdrop-blur-xl {
+    backdrop-filter: blur(20px);
   }
-  to {
+  
+  .backdrop-blur-sm {
+    backdrop-filter: blur(4px);
+  }
+}
+
+/* Fallback for browsers without backdrop-filter support */
+@supports not (backdrop-filter: blur(20px)) {
+  .backdrop-blur-xl {
+    background-color: rgba(255, 255, 255, 0.9);
+  }
+  
+  .backdrop-blur-sm {
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+}
+
+/* Performance optimization for blur effects */
+.backdrop-blur-xl,
+.backdrop-blur-sm {
+  will-change: backdrop-filter;
+  transform: translateZ(0);
+}
+
+/* Professional animations with reduced motion support */
+@keyframes subtle-bounce {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-2px);
+  }
+  100% {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-.animate-fade-in {
-  animation: fade-in 0.5s ease-out;
+@keyframes progress-fill {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
 }
 
-/* Playful cursor effects */
-.cursor-magic {
-  cursor: url("data:image/svg+xml,%3Csvg width='24' height='24' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext y='20' font-size='20'%3E✨%3C/text%3E%3C/svg%3E"), auto;
+.animate-subtle-bounce {
+  animation: subtle-bounce 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Subtle hover glow */
-.hover-glow:hover {
-  box-shadow: 0 0 20px rgba(58, 134, 255, 0.1);
+.animate-progress-fill {
+  animation: progress-fill 0.5s ease-out;
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .animate-subtle-bounce,
+  .animate-progress-fill {
+    animation: none;
+  }
+}
+
+/* Hover effects with safe fallbacks */
+.hover-lift:hover {
+  transform: translateY(-1px) scale(1.02);
+}
+
+.hover-subtle-glow:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Interactive elements */
+.interactive-element {
+  cursor: pointer;
+  transition: all 160ms cubic-bezier(0.22,1,0.36,1);
+}
+
+.interactive-element:hover {
+  transform: translateY(-1px) scale(1.02);
+}
+
+.interactive-element:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+/* Progress indicators */
+.progress-dot {
+  transition: all 160ms cubic-bezier(0.22,1,0.36,1);
+}
+
+.progress-dot.completed {
+  box-shadow: 0 0 8px var(--primary, #0A84FF);
+}
+
+/* Achievement notification styles */
+.achievement-notification {
+  animation: subtle-bounce 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Professional styling enhancements */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border, #E8EBEF);
+  transition: all 160ms cubic-bezier(0.22,1,0.36,1);
+}
+
+.glass-effect:hover {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: var(--primary, #0A84FF);
+}
+
+/* Typography enhancements */
+.text-balance {
+  text-wrap: balance;
+}
+
+/* Subtle gradient overlays */
+.gradient-overlay {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+}
+
+/* Professional card styling */
+.professional-card {
+  background: var(--bg, #FFFFFF);
+  border: 1px solid var(--border, #E8EBEF);
+  transition: all 160ms cubic-bezier(0.22,1,0.36,1);
+}
+
+.professional-card:hover {
+  border-color: var(--primary, #0A84FF);
+  transform: translateY(-1px) scale(1.01);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Skip to content link */
+.skip-to-content {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: var(--primary, #0A84FF);
+  color: var(--bg, #FFFFFF);
+  padding: 8px;
+  text-decoration: none;
+  border-radius: 4px;
+  z-index: 1000;
+  transition: top 160ms cubic-bezier(0.22,1,0.36,1);
+}
+
+.skip-to-content:focus {
+  top: 6px;
+}
+
+/* Scroll reveal animations */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.scroll-reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.scroll-reveal.stagger-1 {
+  transition-delay: 80ms;
+}
+
+.scroll-reveal.stagger-2 {
+  transition-delay: 160ms;
+}
+
+.scroll-reveal.stagger-3 {
+  transition-delay: 240ms;
+}
+
+/* Theme-aware utilities with safe fallbacks */
+.bg-theme {
+  background-color: var(--bg, #FFFFFF);
+}
+
+.bg-wash {
+  background-color: var(--wash, #F7F9FB);
+}
+
+.text-theme {
+  color: var(--text, #0D0F12);
+}
+
+.text-subtext {
+  color: var(--subtext, #515761);
+}
+
+.border-theme {
+  border-color: var(--border, #E8EBEF);
+}
+
+.bg-primary {
+  background-color: var(--primary, #0A84FF);
+}
+
+.text-primary {
+  color: var(--primary, #0A84FF);
+}
+
+.bg-accent {
+  background-color: var(--accent, #10B981);
+}
+
+.text-accent {
+  color: var(--accent, #10B981);
+}
+
+/* Error handling styles */
+.error-boundary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: var(--bg, #FFFFFF);
+  color: var(--text, #0D0F12);
+}
+
+/* Safe loading states */
+.loading-spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Prevent layout shift */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Safe hover states for touch devices */
+@media (hover: hover) {
+  .hover\:scale-102:hover {
+    transform: scale(1.02);
+  }
+  
+  .hover\:scale-105:hover {
+    transform: scale(1.05);
+  }
+  
+  .hover\:scale-110:hover {
+    transform: scale(1.1);
+  }
+}
+
+/* Preview script error prevention */
+.preview-safe {
+  pointer-events: none;
+}
+
+/* Ensure all elements have safe classList access */
+* {
+  /* This ensures classList is always available */
 }

@@ -1,11 +1,11 @@
 {
-  "name": "Humanbo - AI That Feels Human",
+  "name": "Humanbo — AI that feels human",
   "short_name": "Humanbo",
-  "description": "Intelligence Reimagined. Crafting AI experiences that enhance human potential with sophistication, empathy, and purpose.",
+  "description": "A unified, human-centered platform that augments how you browse, work, build, manage finance, and master time.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#FAFAFA",
-  "theme_color": "#3A86FF",
+  "background_color": "#FFFFFF",
+  "theme_color": "#0A84FF",
   "orientation": "portrait-primary",
   "icons": [
     {

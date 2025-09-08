@@ -7,29 +7,29 @@ const AboutPage: React.FC = () => {
   const teamMembers = [
     {
       name: "Fardin Sheikh",
-      role: "Founder & CEO",
-      bio: "Visionary leader with 15+ years in AI and technology. Passionate about creating human-centered AI solutions.",
+      role: "Founder & Visionary",
+      bio: "Pioneering the future of human-AI collaboration with 15+ years of experience in transformative technology. Believes AI should amplify human potential, not replace it.",
       image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face",
       emoji: "🚀"
     },
     {
       name: "Sarah Chen",
-      role: "Head of AI Research",
-      bio: "PhD in Machine Learning from Stanford. Leading our research into empathetic AI systems.",
+      role: "Chief AI Researcher",
+      bio: "PhD in Machine Learning from Stanford. Leading breakthrough research in empathetic AI systems that understand human context and emotion.",
       image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=400&h=400&fit=crop&crop=face",
       emoji: "🧠"
     },
     {
       name: "Marcus Johnson",
       role: "VP of Engineering",
-      bio: "Former Google engineer with expertise in scalable AI infrastructure and user experience.",
+      bio: "Former Google architect specializing in scalable AI infrastructure. Passionate about building technology that feels effortlessly human.",
       image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face",
       emoji: "⚡"
     },
     {
       name: "Elena Rodriguez",
-      role: "Head of Design",
-      bio: "Award-winning designer focused on creating intuitive interfaces that feel magical.",
+      role: "Head of Experience Design",
+      bio: "Award-winning designer creating interfaces that make complex AI feel intuitive and delightful. Believes great design is invisible.",
       image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face",
       emoji: "🎨"
     }
@@ -37,23 +37,23 @@ const AboutPage: React.FC = () => {
 
   const values = [
     {
-      title: "Human-Centered",
-      description: "Every decision we make starts with understanding human needs and emotions.",
+      title: "Human-First Philosophy",
+      description: "Every algorithm, every interface, every decision begins with understanding human needs, emotions, and aspirations.",
       icon: "❤️"
     },
     {
-      title: "Ethical AI",
-      description: "We believe AI should augment human capabilities, not replace human judgment.",
+      title: "Ethical AI Leadership",
+      description: "We champion AI that augments human intelligence while preserving human agency, dignity, and creative expression.",
       icon: "⚖️"
     },
     {
-      title: "Continuous Learning",
-      description: "We embrace curiosity and constantly evolve our understanding of AI's potential.",
-      icon: "📚"
+      title: "Relentless Innovation",
+      description: "Pushing the boundaries of what's possible while staying grounded in practical solutions that create real value.",
+      icon: "🚀"
     },
     {
-      title: "Transparency",
-      description: "Open communication and honest practices guide everything we build.",
+      title: "Radical Transparency",
+      description: "Open about our methods, honest about limitations, and committed to building trust through authentic communication.",
       icon: "🔍"
     }
   ];
@@ -64,12 +64,12 @@ const AboutPage: React.FC = () => {
       <section className="py-20 px-8">
         <div className="max-w-humanbo mx-auto text-center">
           <h1 className="text-6xl md:text-7xl lg:text-8xl font-inter font-extralight text-humanbo-black mb-8 leading-ultra-tight tracking-tight">
-            About
+            Redefining
             <br />
-            <span className="font-light italic text-humanbo-blue">Humanbo</span>
+            <span className="font-light italic text-humanbo-blue">Intelligence</span>
           </h1>
           <p className="text-xl md:text-2xl font-inter font-light text-humanbo-gray mb-12 max-w-3xl mx-auto leading-relaxed tracking-wide">
-            We're on a mission to make artificial intelligence feel genuinely human — intuitive, empathetic, and delightfully helpful.
+            We're not just building AI—we're crafting the future of human-machine collaboration. A future where technology amplifies the best of human creativity, intuition, and wisdom.
           </p>
         </div>
       </section>
@@ -80,17 +80,17 @@ const AboutPage: React.FC = () => {
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <div>
               <h2 className="text-4xl md:text-5xl font-inter font-light text-humanbo-black mb-8 tracking-tight">
-                Our Story
+                Our Genesis Story
               </h2>
               <div className="space-y-6">
                 <p className="text-lg font-inter font-light text-humanbo-gray leading-relaxed">
-                  Founded in 2023, Humanbo emerged from a simple observation: while AI was becoming incredibly powerful, it was also becoming increasingly cold and mechanical. We believed there had to be a better way.
+                  In 2023, as AI became increasingly powerful yet paradoxically more distant from human experience, our founder Fardin Sheikh saw an opportunity to change the narrative entirely.
                 </p>
                 <p className="text-lg font-inter font-light text-humanbo-gray leading-relaxed">
-                  Our founder, Fardin Sheikh, assembled a team of researchers, engineers, and designers who shared a common vision: AI that doesn't just process data, but truly understands context, emotion, and human intent.
+                  Instead of AI that replaces human intelligence, what if we created AI that amplifies human brilliance? What if technology could understand not just what we say, but what we mean? What we feel? What we aspire to become?
                 </p>
                 <p className="text-lg font-inter font-light text-humanbo-gray leading-relaxed">
-                  Today, we're proud to serve thousands of users who experience AI that feels less artificial and more... human.
+                  Today, Humanbo serves over 50,000 users who experience AI that feels less artificial and more... authentically helpful. We're just getting started.
                 </p>
               </div>
             </div>
@@ -98,20 +98,20 @@ const AboutPage: React.FC = () => {
               <div className="text-center mb-6">
                 <div className="text-6xl mb-4">🌟</div>
                 <h3 className="text-2xl font-inter font-medium text-humanbo-black mb-4 tracking-tight">
-                  Our Impact
+                  Impact That Matters
                 </h3>
               </div>
               <div className="space-y-4">
                 <div className="flex justify-between items-center p-4 bg-humanbo-subtle rounded-lg">
-                  <span className="font-inter font-light text-humanbo-gray">Active Users</span>
+                  <span className="font-inter font-light text-humanbo-gray">Lives Enhanced</span>
                   <span className="font-inter font-medium text-humanbo-black text-xl">50,000+</span>
                 </div>
                 <div className="flex justify-between items-center p-4 bg-humanbo-subtle rounded-lg">
-                  <span className="font-inter font-light text-humanbo-gray">AI Interactions</span>
+                  <span className="font-inter font-light text-humanbo-gray">Meaningful Interactions</span>
                   <span className="font-inter font-medium text-humanbo-black text-xl">2M+</span>
                 </div>
                 <div className="flex justify-between items-center p-4 bg-humanbo-subtle rounded-lg">
-                  <span className="font-inter font-light text-humanbo-gray">Satisfaction Rate</span>
+                  <span className="font-inter font-light text-humanbo-gray">User Satisfaction</span>
                   <span className="font-inter font-medium text-humanbo-black text-xl">98%</span>
                 </div>
               </div>
@@ -125,10 +125,10 @@ const AboutPage: React.FC = () => {
         <div className="max-w-humanbo mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-inter font-light text-humanbo-black mb-6 tracking-tight">
-              Our Values
+              Our Core Convictions
             </h2>
             <p className="text-lg font-inter font-light text-humanbo-gray max-w-2xl mx-auto">
-              The principles that guide every decision we make and every product we build
+              The unwavering principles that guide every decision, every line of code, every user interaction
             </p>
           </div>
           
@@ -155,10 +155,10 @@ const AboutPage: React.FC = () => {
         <div className="max-w-humanbo mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-inter font-light text-humanbo-black mb-6 tracking-tight">
-              Meet Our Team
+              The Minds Behind the Magic
             </h2>
             <p className="text-lg font-inter font-light text-humanbo-gray max-w-2xl mx-auto">
-              The brilliant minds behind Humanbo's human-centered AI revolution
+              Visionaries, researchers, and builders united by a shared belief in human-centered AI
             </p>
           </div>
           
@@ -199,10 +199,10 @@ const AboutPage: React.FC = () => {
       <section className="py-20 px-8">
         <div className="max-w-humanbo mx-auto text-center">
           <h2 className="text-4xl md:text-5xl font-inter font-light text-humanbo-black mb-6 tracking-tight">
-            Join Our Mission
+            Shape the Future With Us
           </h2>
           <p className="text-lg font-inter font-light text-humanbo-gray mb-8 max-w-2xl mx-auto">
-            Ready to be part of the human-centered AI revolution? We're always looking for passionate people to join our team.
+            Ready to be part of the human-AI collaboration revolution? We're always seeking brilliant minds who share our vision of technology that amplifies human potential.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
             <Link 
@@ -210,7 +210,7 @@ const AboutPage: React.FC = () => {
               className="group bg-humanbo-blue text-humanbo-white px-10 py-4 rounded-full font-inter font-medium text-base tracking-wide hover:bg-blue-600 transition-all duration-300 transform hover:scale-105"
             >
               <span className="flex items-center gap-2">
-                View Open Positions
+                Explore Opportunities
                 <i className="bi bi-arrow-right transition-transform duration-300 group-hover:translate-x-1"></i>
               </span>
             </Link>
@@ -218,7 +218,7 @@ const AboutPage: React.FC = () => {
               to="/contact"
               className="border-2 border-humanbo-black text-humanbo-black px-10 py-4 rounded-full font-inter font-medium text-base tracking-wide hover:bg-humanbo-black hover:text-humanbo-white transition-all duration-300"
             >
-              Get In Touch
+              Start a Conversation
             </Link>
           </div>
         </div>

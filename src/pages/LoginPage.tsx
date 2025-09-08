@@ -8,6 +8,8 @@ const LoginPage: React.FC = () => {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [logoLoaded, setLogoLoaded] = useState(false);
+  const [logoError, setLogoError] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,19 +30,39 @@ const LoginPage: React.FC = () => {
     });
   };
 
+  const handleLogoError = () => {
+    setLogoError(true);
+  };
+
+  const LogoComponent = () => {
+    if (logoError) {
+      return (
+        <div className="w-8 h-8 bg-gradient-to-br from-humanbo-blue to-blue-600 rounded-lg flex items-center justify-center text-white font-inter font-bold text-sm">
+          H
+        </div>
+      );
+    }
+
+    return (
+      <img 
+        src="https://cdn.websparks.ai/Project_Images/57_Group2085662504-25fe665c.png" 
+        alt="Humanbo Logo"
+        className="h-8 w-8 object-contain"
+        crossOrigin="anonymous"
+        onError={handleLogoError}
+        onLoad={() => setLogoError(false)}
+      />
+    );
+  };
+
   return (
-    <div className="pt-24 pb-20 min-h-screen flex items-center justify-center">
+    <div className="pt-16 pb-20 min-h-screen flex items-center justify-center">
       <div className="max-w-md w-full mx-auto px-8">
         <div className="text-center mb-12">
-          <Link to="/" className="inline-flex items-center gap-3 mb-8 hover:scale-105 transition-transform duration-300">
-            <img 
-              src="https://cdn.websparks.ai/Project_Images/57_Group2085662504-25fe665c.png" 
-              alt="Humanbo Logo"
-              className="h-8 w-8"
-              crossOrigin="anonymous"
-            />
-            <span className="text-humanbo-black font-inter font-medium text-xl tracking-premium">
-              Humanbo
+          <Link to="/" className="inline-flex items-center gap-2.5 mb-8 hover:scale-105 transition-transform duration-300">
+            <LogoComponent />
+            <span className="text-humanbo-black font-inter font-semibold text-xl tracking-tight">
+              humanbo
             </span>
           </Link>
           <h1 className="text-4xl md:text-5xl font-inter font-light text-humanbo-black mb-4 tracking-tight">

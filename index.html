@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
     <!-- Primary Meta Tags -->
-    <title>Humanbo - AI That Feels Human</title>
-    <meta name="title" content="Humanbo - AI That Feels Human" />
-    <meta name="description" content="Intelligence Reimagined. Crafting AI experiences that enhance human potential with sophistication, empathy, and purpose." />
-    <meta name="keywords" content="AI, artificial intelligence, human-centered AI, machine learning, chatbot, automation, productivity, technology" />
+    <title>Humanbo — AI that feels human</title>
+    <meta name="title" content="Humanbo — AI that feels human" />
+    <meta name="description" content="A unified, human-centered platform that augments how you browse, work, build, manage finance, and master time." />
+    <meta name="keywords" content="AI platform, human-centered AI, productivity, automation, unified platform, Askify, Mocdt, WebSparks, OwnCents, Time Wallet" />
     <meta name="robots" content="index, follow" />
     <meta name="language" content="English" />
     <meta name="author" content="Humanbo Team" />
@@ -17,8 +17,8 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://humanbo.com/" />
-    <meta property="og:title" content="Humanbo - AI That Feels Human" />
-    <meta property="og:description" content="Intelligence Reimagined. Crafting AI experiences that enhance human potential with sophistication, empathy, and purpose." />
+    <meta property="og:title" content="Humanbo — AI that feels human" />
+    <meta property="og:description" content="A unified, human-centered platform that augments how you browse, work, build, manage finance, and master time." />
     <meta property="og:image" content="https://cdn.websparks.ai/Project_Images/57_Group2085662504-25fe665c.png" />
     <meta property="og:site_name" content="Humanbo" />
     <meta property="og:locale" content="en_US" />
@@ -26,15 +26,15 @@
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content="https://humanbo.com/" />
-    <meta property="twitter:title" content="Humanbo - AI That Feels Human" />
-    <meta property="twitter:description" content="Intelligence Reimagined. Crafting AI experiences that enhance human potential with sophistication, empathy, and purpose." />
+    <meta property="twitter:title" content="Humanbo — AI that feels human" />
+    <meta property="twitter:description" content="A unified, human-centered platform that augments how you browse, work, build, manage finance, and master time." />
     <meta property="twitter:image" content="https://cdn.websparks.ai/Project_Images/57_Group2085662504-25fe665c.png" />
     <meta property="twitter:site" content="@humanbo" />
     <meta property="twitter:creator" content="@humanbo" />
     
     <!-- Additional Meta Tags -->
-    <meta name="theme-color" content="#3A86FF" />
-    <meta name="msapplication-TileColor" content="#3A86FF" />
+    <meta name="theme-color" content="#0A84FF" />
+    <meta name="msapplication-TileColor" content="#0A84FF" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <meta name="apple-mobile-web-app-title" content="Humanbo" />
@@ -55,6 +55,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://images.unsplash.com">
     <link rel="preconnect" href="https://cdn.websparks.ai">
+    <link rel="preconnect" href="https://www.googletagmanager.com">
     
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -62,13 +63,81 @@
     <!-- Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
     
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EJ284JEHEH"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EJ284JEHEH', {
+        page_title: document.title,
+        page_location: window.location.href,
+        send_page_view: true
+      });
+    </script>
+    
+    <!-- Preview Script Error Prevention -->
+    <script>
+      // Prevent preview script errors before they occur
+      (function() {
+        try {
+          // Override querySelector to provide safe classList
+          const originalQuerySelector = Document.prototype.querySelector;
+          Document.prototype.querySelector = function(selector) {
+            try {
+              const element = originalQuerySelector.call(this, selector);
+              if (element && !element.classList) {
+                Object.defineProperty(element, 'classList', {
+                  value: {
+                    add: function() {},
+                    remove: function() {},
+                    contains: function() { return false; },
+                    toggle: function() { return false; }
+                  },
+                  writable: false
+                });
+              }
+              return element;
+            } catch (error) {
+              console.warn('Safe querySelector error:', error);
+              return null;
+            }
+          };
+
+          // Suppress preview script errors
+          window.addEventListener('error', function(event) {
+            if (event.filename && event.filename.includes('preview-script')) {
+              console.warn('Preview script error suppressed:', event.error);
+              event.preventDefault();
+              return false;
+            }
+          });
+
+          // Override console.error to suppress preview script errors
+          const originalConsoleError = console.error;
+          console.error = function() {
+            const message = Array.prototype.join.call(arguments, ' ');
+            if (message.includes('classList') || 
+                message.includes('preview-script') || 
+                message.includes('setInspectorActive')) {
+              console.warn('Preview script error suppressed:', arguments);
+              return;
+            }
+            originalConsoleError.apply(console, arguments);
+          };
+        } catch (error) {
+          console.warn('Preview script error prevention failed:', error);
+        }
+      })();
+    </script>
+    
     <!-- Structured Data -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Organization",
       "name": "Humanbo",
-      "description": "Intelligence Reimagined. Crafting AI experiences that enhance human potential with sophistication, empathy, and purpose.",
+      "description": "A unified, human-centered platform that augments how you browse, work, build, manage finance, and master time.",
       "url": "https://humanbo.com",
       "logo": "https://cdn.websparks.ai/Project_Images/57_Group2085662504-25fe665c.png",
       "sameAs": [
@@ -78,14 +147,14 @@
       ],
       "contactPoint": {
         "@type": "ContactPoint",
-        "telephone": "+1-555-HUMANBO",
+        "telephone": "+1 (307) 310-2096",
         "contactType": "customer service",
         "email": "hello@humanbo.com"
       },
       "address": {
         "@type": "PostalAddress",
-        "addressLocality": "San Francisco",
-        "addressRegion": "CA",
+        "addressLocality": "Sheridan",
+        "addressRegion": "WY",
         "addressCountry": "US"
       },
       "foundingDate": "2023",
@@ -93,7 +162,19 @@
         "@type": "Person",
         "name": "Fardin Sheikh"
       },
-      "numberOfEmployees": "50-100"
+      "numberOfEmployees": "15-20",
+      "product": {
+        "@type": "Product",
+        "name": "Humanbo Platform",
+        "description": "Unified AI platform with capabilities for browsing, work, development, finance, and time management",
+        "category": "AI Software Platform",
+        "offers": {
+          "@type": "AggregateOffer",
+          "priceCurrency": "USD",
+          "lowPrice": "0",
+          "highPrice": "99"
+        }
+      }
     }
     </script>
     
@@ -107,18 +188,26 @@
     <link rel="dns-prefetch" href="//fonts.googleapis.com">
     <link rel="dns-prefetch" href="//images.unsplash.com">
     <link rel="dns-prefetch" href="//cdn.websparks.ai">
+    <link rel="dns-prefetch" href="//www.googletagmanager.com">
+    
+    <!-- Critical CSS Inline -->
+    <style>
+      /* Critical above-the-fold styles */
+      body { 
+        margin: 0; 
+        font-family: Inter, system-ui, sans-serif; 
+        background-color: #FFFFFF;
+        color: #0D0F12;
+      }
+      .loading { opacity: 0; }
+      .loaded { opacity: 1; transition: opacity 0.3s ease; }
+      
+      /* Prevent preview script errors */
+      .preview-safe { pointer-events: none; }
+    </style>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-    
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-XXXXXXXXXX');
-    </script>
   </body>
 </html>

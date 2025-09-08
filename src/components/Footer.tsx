@@ -1,159 +1,174 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 const Footer: React.FC = () => {
-  const [easterEgg, setEasterEgg] = useState(false);
+  const [logoError, setLogoError] = useState(false);
+  const [logoLoaded, setLogoLoaded] = useState(false);
+
+  // Preload the logo image
+  useEffect(() => {
+    const img = new Image();
+    img.onload = () => {
+      setLogoLoaded(true);
+      setLogoError(false);
+    };
+    img.onerror = () => {
+      setLogoError(true);
+      setLogoLoaded(false);
+    };
+    img.src = 'https://cdn.websparks.ai/Project_Images/57_Group2085662504-25fe665c.png';
+  }, []);
+
+  const LogoComponent = () => {
+    if (logoError || !logoLoaded) {
+      return (
+        <div className="w-6 h-6 bg-gradient-to-br from-humanbo-blue to-blue-600 rounded-md flex items-center justify-center text-white font-inter font-medium text-xs">
+          <span className="tracking-tight">H</span>
+        </div>
+      );
+    }
+
+    return (
+      <img 
+        src="https://cdn.websparks.ai/Project_Images/57_Group2085662504-25fe665c.png" 
+        alt="Humanbo Logo"
+        className="w-6 h-6 object-contain"
+        loading="lazy"
+        decoding="async"
+        onError={() => setLogoError(true)}
+        onLoad={() => {
+          setLogoLoaded(true);
+          setLogoError(false);
+        }}
+      />
+    );
+  };
 
   return (
-    <footer className="py-20 px-8 border-t border-humanbo-divider bg-humanbo-cream">
-      <div className="max-w-humanbo mx-auto">
-        <div className="grid md:grid-cols-12 gap-12 mb-16">
-          <div className="md:col-span-4">
-            <div 
-              className="flex items-center gap-3 mb-4 cursor-pointer hover:scale-105 transition-transform duration-300"
-              onClick={() => setEasterEgg(!easterEgg)}
-            >
-              <img 
-                src="https://cdn.websparks.ai/Project_Images/57_Group2085662504-25fe665c.png" 
-                alt="Humanbo Logo"
-                className={`h-6 w-6 transition-all duration-300 ${easterEgg ? 'rotate-180 scale-125' : ''}`}
-                crossOrigin="anonymous"
-              />
-              <span className="text-humanbo-black font-inter font-medium text-2xl tracking-premium">
+    <footer className="border-t border-humanbo-divider bg-humanbo-white" role="contentinfo">
+      <div className="max-w-7xl mx-auto px-6 py-8">
+        {/* Main Footer Content */}
+        <div className="grid lg:grid-cols-3 gap-8 mb-6">
+          {/* Brand Section */}
+          <div>
+            <Link to="/" className="flex items-center gap-2 mb-3 hover:opacity-80 transition-opacity duration-200">
+              <LogoComponent />
+              <span className="text-humanbo-black font-inter font-semibold text-lg tracking-tight">
                 Humanbo
               </span>
-              {easterEgg && (
-                <span className="text-lg animate-bounce">🎉</span>
-              )}
-            </div>
-            <p className="text-humanbo-gray font-inter font-light text-base tracking-wide leading-relaxed max-w-md hover:text-humanbo-black transition-colors duration-300 cursor-default">
-              Intelligence Reimagined. Crafting AI experiences that enhance human potential with sophistication, empathy, and purpose.
-              {easterEgg && (
-                <span className="block mt-2 text-sm text-humanbo-blue animate-fade-in">
-                  🎊 <em>You found our footer surprise! We love curious explorers.</em>
-                </span>
-              )}
+            </Link>
+            <p className="text-humanbo-gray font-inter font-light text-sm leading-relaxed mb-4 max-w-xs">
+              AI that amplifies human potential with sophistication and purpose.
             </p>
           </div>
-          <div className="md:col-span-8">
-            <nav className="grid grid-cols-2 md:grid-cols-4 gap-8">
-              <div>
-                <h3 className="text-humanbo-black font-inter font-medium text-sm tracking-ultra-wide uppercase mb-4 hover:text-humanbo-blue transition-colors duration-300 cursor-default">
-                  ✨ Products
-                </h3>
-                <div className="space-y-3">
-                  {[
-                    { name: 'Askify', path: '/askify' },
-                    { name: 'Mocdt', path: '/mocdt' },
-                    { name: 'WebSparks', path: '/websparks' },
-                    { name: 'OwnCents', path: '/owncents' },
-                    { name: 'Time Wallet', path: '/time-wallet' }
-                  ].map((product) => (
-                    <Link 
-                      key={product.path}
-                      to={product.path}
-                      className="block text-humanbo-gray font-inter font-light text-sm tracking-wide hover:text-humanbo-black hover:translate-x-1 transition-all duration-300"
-                    >
-                      {product.name}
-                    </Link>
-                  ))}
-                </div>
+
+          {/* Quick Links */}
+          <div className="grid grid-cols-2 gap-6">
+            <div>
+              <h4 className="text-humanbo-black font-inter font-medium text-sm mb-3">Products</h4>
+              <div className="space-y-2">
+                {[
+                  { name: 'Askify', path: '/askify' },
+                  { name: 'Mocdt', path: '/mocdt' },
+                  { name: 'WebSparks', path: '/websparks' },
+                  { name: 'OwnCents', path: '/owncents' }
+                ].map((product) => (
+                  <Link 
+                    key={product.path}
+                    to={product.path}
+                    className="block text-humanbo-gray font-inter font-light text-sm hover:text-humanbo-black transition-colors duration-200"
+                  >
+                    {product.name}
+                  </Link>
+                ))}
               </div>
-              <div>
-                <h3 className="text-humanbo-black font-inter font-medium text-sm tracking-ultra-wide uppercase mb-4 hover:text-humanbo-blue transition-colors duration-300 cursor-default">
-                  🏢 Company
-                </h3>
-                <div className="space-y-3">
-                  {[
-                    { name: 'About', path: '/about' },
-                    { name: 'Careers', path: '/careers' },
-                    { name: 'Blog', path: '/blog' },
-                    { name: 'Contact', path: '/contact' },
-                    { name: 'Press', path: '/press' }
-                  ].map((item) => (
-                    <Link 
-                      key={item.path}
-                      to={item.path}
-                      className="block text-humanbo-gray font-inter font-light text-sm tracking-wide hover:text-humanbo-black hover:translate-x-1 transition-all duration-300"
-                    >
-                      {item.name}
-                    </Link>
-                  ))}
-                </div>
+            </div>
+
+            <div>
+              <h4 className="text-humanbo-black font-inter font-medium text-sm mb-3">Company</h4>
+              <div className="space-y-2">
+                {[
+                  { name: 'About', path: '/about' },
+                  { name: 'Careers', path: '/careers' },
+                  { name: 'Contact', path: '/contact' },
+                  { name: 'Support', path: '/support' }
+                ].map((item) => (
+                  <Link 
+                    key={item.path}
+                    to={item.path}
+                    className="block text-humanbo-gray font-inter font-light text-sm hover:text-humanbo-black transition-colors duration-200"
+                  >
+                    {item.name}
+                  </Link>
+                ))}
               </div>
+            </div>
+          </div>
+
+          {/* Contact Info */}
+          <div>
+            <h4 className="text-humanbo-black font-inter font-medium text-sm mb-3">Contact</h4>
+            <div className="space-y-2 text-sm text-humanbo-gray font-inter font-light">
               <div>
-                <h3 className="text-humanbo-black font-inter font-medium text-sm tracking-ultra-wide uppercase mb-4 hover:text-humanbo-blue transition-colors duration-300 cursor-default">
-                  💡 Resources
-                </h3>
-                <div className="space-y-3">
-                  {[
-                    { name: 'Support', path: '/support' },
-                    { name: 'Pricing', path: '/pricing' },
-                    { name: 'Documentation', path: '/docs' },
-                    { name: 'API', path: '/api' },
-                    { name: 'Status', path: '/status' }
-                  ].map((item) => (
-                    <Link 
-                      key={item.path}
-                      to={item.path}
-                      className="block text-humanbo-gray font-inter font-light text-sm tracking-wide hover:text-humanbo-black hover:translate-x-1 transition-all duration-300"
-                    >
-                      {item.name}
-                    </Link>
-                  ))}
-                </div>
+                <p className="font-medium text-humanbo-black">🇺🇸 US Office</p>
+                <p>30 N Gould St, Sheridan, WY 82802</p>
+                <a href="mailto:hello@humanbo.com" className="hover:text-humanbo-blue transition-colors duration-200">
+                  hello@humanbo.com
+                </a>
               </div>
-              <div>
-                <h3 className="text-humanbo-black font-inter font-medium text-sm tracking-ultra-wide uppercase mb-4 hover:text-humanbo-blue transition-colors duration-300 cursor-default">
-                  ⚖️ Legal
-                </h3>
-                <div className="space-y-3">
-                  {[
-                    { name: 'Privacy Policy', path: '/privacy' },
-                    { name: 'Terms of Service', path: '/terms' },
-                    { name: 'Cookie Policy', path: '/cookies' },
-                    { name: 'Security', path: '/security' },
-                    { name: 'Compliance', path: '/compliance' }
-                  ].map((item) => (
-                    <Link 
-                      key={item.path}
-                      to={item.path}
-                      className="block text-humanbo-gray font-inter font-light text-sm tracking-wide hover:text-humanbo-black hover:translate-x-1 transition-all duration-300"
-                    >
-                      {item.name}
-                    </Link>
-                  ))}
-                </div>
+              <div className="pt-2">
+                <p className="font-medium text-humanbo-black">🇧🇩 BD Office</p>
+                <p>51/B Kemal Ataturk Ave, Dhaka 1213</p>
+                <a href="mailto:hey.bd@humanbo.com" className="hover:text-humanbo-blue transition-colors duration-200">
+                  hey.bd@humanbo.com
+                </a>
               </div>
-            </nav>
+            </div>
           </div>
         </div>
-        
-        <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-humanbo-divider">
-          <div className="flex gap-6 mb-4 md:mb-0">
+
+        {/* Bottom Bar */}
+        <div className="flex flex-col md:flex-row justify-between items-center pt-6 border-t border-humanbo-divider gap-4">
+          {/* Copyright */}
+          <div className="text-humanbo-gray font-inter font-light text-xs">
+            © 2024 Humanbo. All rights reserved.
+          </div>
+
+          {/* Social Links */}
+          <div className="flex gap-3">
             {[
-              { icon: 'bi-linkedin', label: 'LinkedIn', hover: '💼' },
-              { icon: 'bi-twitter-x', label: 'Twitter', hover: '🐦' },
-              { icon: 'bi-instagram', label: 'Instagram', hover: '📸' },
-              { icon: 'bi-github', label: 'GitHub', hover: '👨‍💻' }
+              { icon: 'bi-facebook', label: 'Facebook', url: 'https://www.facebook.com/humanboai/' },
+              { icon: 'bi-instagram', label: 'Instagram', url: 'https://www.instagram.com/humanboai' },
+              { icon: 'bi-youtube', label: 'YouTube', url: 'https://www.youtube.com/@Humanbo' },
+              { icon: 'bi-linkedin', label: 'LinkedIn', url: 'https://www.linkedin.com/company/humanbo/' }
             ].map((social) => (
               <a 
                 key={social.label}
-                href="#" 
-                className="group w-10 h-10 bg-humanbo-white border border-humanbo-divider rounded-full flex items-center justify-center text-humanbo-gray hover:text-humanbo-black hover:border-humanbo-black transition-all duration-300 transform hover:scale-110 hover:rotate-12"
+                href={social.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-7 h-7 bg-humanbo-subtle rounded-md flex items-center justify-center text-humanbo-gray hover:text-humanbo-blue hover:bg-humanbo-blue/10 transition-all duration-200"
                 aria-label={social.label}
               >
-                <span className="group-hover:hidden">
-                  <i className={`bi ${social.icon} text-sm`}></i>
-                </span>
-                <span className="hidden group-hover:block text-xs">
-                  {social.hover}
-                </span>
+                <i className={`bi ${social.icon} text-xs`} aria-hidden="true"></i>
               </a>
             ))}
           </div>
-          <div className="text-humanbo-gray font-inter font-light text-xs tracking-wide hover:text-humanbo-blue transition-colors duration-300 cursor-default">
-            © 2024 Humanbo. Powered by Websparks AI. Made with 💙
+
+          {/* Legal Links */}
+          <div className="flex gap-4 text-xs">
+            {[
+              { name: 'Privacy', path: '/privacy' },
+              { name: 'Terms', path: '/terms' }
+            ].map((item) => (
+              <Link 
+                key={item.path}
+                to={item.path}
+                className="text-humanbo-gray font-inter font-light hover:text-humanbo-black transition-colors duration-200"
+              >
+                {item.name}
+              </Link>
+            ))}
           </div>
         </div>
       </div>

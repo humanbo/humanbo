@@ -9,7 +9,6 @@ const NotFoundPage: React.FC = () => {
     { title: 'About Us', path: '/about', description: 'Learn about our mission' },
     { title: 'Our Products', path: '/#products', description: 'Explore our AI solutions' },
     { title: 'Contact Support', path: '/support', description: 'Get help from our team' },
-    { title: 'Pricing', path: '/pricing', description: 'View our pricing plans' },
     { title: 'Blog', path: '/blog', description: 'Read our latest articles' }
   ]);
 

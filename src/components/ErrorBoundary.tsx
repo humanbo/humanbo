@@ -1,4 +1,5 @@
 import React, { Component, ErrorInfo, ReactNode } from 'react';
+import { trackException } from '../utils/analytics';
 
 interface Props {
   children: ReactNode;
@@ -21,6 +22,13 @@ class ErrorBoundary extends Component<Props, State> {
   public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     console.error('Uncaught error:', error, errorInfo);
     
+    // Track error in analytics
+    try {
+      trackException(error.message, true);
+    } catch (analyticsError) {
+      console.warn('Failed to track error in analytics:', analyticsError);
+    }
+    
     // In production, you would send this to your error reporting service
     if (import.meta.env.PROD) {
       // Example: Sentry.captureException(error);
@@ -41,13 +49,25 @@ class ErrorBoundary extends Component<Props, State> {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button
-                onClick={() => window.location.reload()}
+                onClick={() => {
+                  try {
+                    window.location.reload();
+                  } catch (error) {
+                    console.error('Failed to reload page:', error);
+                  }
+                }}
                 className="bg-humanbo-blue text-humanbo-white px-8 py-3 rounded-full font-inter font-medium text-base tracking-wide hover:bg-blue-600 transition-all duration-300 transform hover:scale-105"
               >
                 Refresh Page
               </button>
               <button
-                onClick={() => window.location.href = '/'}
+                onClick={() => {
+                  try {
+                    window.location.href = '/';
+                  } catch (error) {
+                    console.error('Failed to navigate home:', error);
+                  }
+                }}
                 className="border-2 border-humanbo-black text-humanbo-black px-8 py-3 rounded-full font-inter font-medium text-base tracking-wide hover:bg-humanbo-black hover:text-humanbo-white transition-all duration-300"
               >
                 Go Home
